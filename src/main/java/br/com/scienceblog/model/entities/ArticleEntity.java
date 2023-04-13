@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class Article {
+public class ArticleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,9 +17,9 @@ public class Article {
     @Lob
     private String text;
 
-    public Article() {}
+    public ArticleEntity() {}
 
-    public Article(Integer id, String title, String author, LocalDateTime dateTime, String text) {
+    public ArticleEntity(Integer id, String title, String author, LocalDateTime dateTime, String text) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -31,8 +31,8 @@ public class Article {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Article article = (Article) o;
-        return Objects.equals(id, article.id);
+        ArticleEntity articleEntity = (ArticleEntity) o;
+        return Objects.equals(id, articleEntity.id);
     }
 
     @Override
