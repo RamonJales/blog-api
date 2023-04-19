@@ -3,13 +3,15 @@ package br.com.scienceblog.model.servicies.serviceImpl;
 import br.com.scienceblog.model.entities.ArticleEntity;
 import br.com.scienceblog.model.repositories.ArticleRepository;
 import br.com.scienceblog.model.servicies.ArticleService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ArticleServiceImpl implements ArticleService {
 
-    private ArticleRepository articleRepository;
+    final ArticleRepository articleRepository;
 
     public ArticleServiceImpl(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;

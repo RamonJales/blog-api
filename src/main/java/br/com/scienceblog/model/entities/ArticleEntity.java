@@ -19,8 +19,7 @@ public class ArticleEntity {
 
     public ArticleEntity() {}
 
-    public ArticleEntity(Integer id, String title, String author, LocalDateTime dateTime, String text) {
-        this.id = id;
+    public ArticleEntity(String title, String author, LocalDateTime dateTime, String text) {
         this.title = title;
         this.author = author;
         this.dateTime = dateTime;
