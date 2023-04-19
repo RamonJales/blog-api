@@ -13,16 +13,42 @@ public class ArticleEntity {
     private Integer id;
     private String title;
     private String author;
-    private LocalDateTime dateTime;
     @Lob
     private String text;
 
     public ArticleEntity() {}
 
-    public ArticleEntity(String title, String author, LocalDateTime dateTime, String text) {
+    public ArticleEntity(String title, String author, String text) {
         this.title = title;
         this.author = author;
-        this.dateTime = dateTime;
+        this.text = text;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
         this.text = text;
     }
 
