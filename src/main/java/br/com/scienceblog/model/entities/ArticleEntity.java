@@ -2,6 +2,7 @@ package br.com.scienceblog.model.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,6 +14,8 @@ public class ArticleEntity {
     private Integer id;
     private String title;
     private String author;
+    //@JsonFormat(shape =JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime localDateTime = LocalDateTime.now();
     @Lob
     private String text;
 
@@ -43,6 +46,10 @@ public class ArticleEntity {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    public LocalDateTime getLocalDateTime() {return localDateTime;}
+
+    public void setLocalDateTime() {this.localDateTime = LocalDateTime.now();}
 
     public String getText() {
         return text;

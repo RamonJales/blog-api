@@ -33,6 +33,7 @@ public class ArticleService {
 
         entity.setTitle(obj.getTitle());
         entity.setAuthor(obj.getAuthor());
+        entity.setLocalDateTime();
         entity.setText(obj.getText());
 
         return articleRepository.save(obj);
