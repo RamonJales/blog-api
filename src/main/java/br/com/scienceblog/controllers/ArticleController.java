@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/article")
@@ -25,7 +24,7 @@ public class ArticleController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ArticleEntity findById(@PathVariable Integer id) {
-        return articleService.findById(id).get();
+        return articleService.findById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -42,7 +41,7 @@ public class ArticleController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
-        articleService.deleteById(id);
+        articleService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

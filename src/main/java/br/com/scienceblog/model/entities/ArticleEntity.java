@@ -1,21 +1,27 @@
 package br.com.scienceblog.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 public class ArticleEntity {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotBlank
     private String title;
+    @NotBlank
     private String author;
-    //@JsonFormat(shape =JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape =JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime localDateTime = LocalDateTime.now();
+    @NotBlank
     @Lob
     private String text;
 

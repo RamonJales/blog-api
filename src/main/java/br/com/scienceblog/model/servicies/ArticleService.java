@@ -1,11 +1,11 @@
 package br.com.scienceblog.model.servicies;
 
+import br.com.scienceblog.controllers.exceptions.ResourceNotFoundException;
 import br.com.scienceblog.model.entities.ArticleEntity;
 import br.com.scienceblog.model.repositories.ArticleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ArticleService {
@@ -16,8 +16,9 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public Optional<ArticleEntity> findById(Integer id) {
-        return articleRepository.findById(id);
+    public ArticleEntity findById(Integer id) {
+        return articleRepository.findById(id).
+                orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
     }
 
     public List<ArticleEntity> findAll() {
@@ -29,7 +30,8 @@ public class ArticleService {
     }
 
     public ArticleEntity update(ArticleEntity obj) {
-        ArticleEntity entity = articleRepository.findById(obj.getId()).get();
+        ArticleEntity entity = articleRepository.findById(obj.getId()).
+                orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
 
         entity.setTitle(obj.getTitle());
         entity.setAuthor(obj.getAuthor());
@@ -39,7 +41,9 @@ public class ArticleService {
         return articleRepository.save(obj);
     }
 
-    public void deleteById(Integer id) {
-        articleRepository.deleteById(id);
+    public void delete(Integer id) {
+        ArticleEntity obj = articleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource not found!"));
+        articleRepository.delete(obj);
     }
 }
