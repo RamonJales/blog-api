@@ -1,6 +1,6 @@
 package br.com.scienceblog.config;
 
-import br.com.scienceblog.model.entities.ArticleEntity;
+import br.com.scienceblog.data.vo.v1.ArticleVO;
 import br.com.scienceblog.model.servicies.ArticleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +18,8 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        ArticleEntity o1 = new ArticleEntity("AAA", "aaaaa", "aaaaaaaaa");
-        ArticleEntity o2 = new ArticleEntity("BBB", "bbbbb", "bbbbbbbbb");
+        ArticleVO o1 = new ArticleVO("AAA", "aaaaa", "aaaaaaaaa");
+        ArticleVO o2 = new ArticleVO("BBB", "bbbbb", "bbbbbbbbb");
 
         articleService.save(o1);
         articleService.save(o2);

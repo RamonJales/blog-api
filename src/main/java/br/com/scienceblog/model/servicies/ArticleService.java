@@ -1,10 +1,13 @@
 package br.com.scienceblog.model.servicies;
 
 import br.com.scienceblog.controllers.exceptions.ResourceNotFoundException;
+import br.com.scienceblog.data.vo.v1.ArticleVO;
+import br.com.scienceblog.mapper.DozerMapper;
 import br.com.scienceblog.model.entities.ArticleEntity;
 import br.com.scienceblog.model.repositories.ArticleRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,29 +19,36 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public ArticleEntity findById(Integer id) {
-        return articleRepository.findById(id).
-                orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
+    public ArticleVO findById(Integer id) {
+
+        ArticleEntity obj = articleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
+
+        return DozerMapper.parseObject(obj, ArticleVO.class);
     }
 
-    public List<ArticleEntity> findAll() {
-        return articleRepository.findAll();
+    public List<ArticleVO> findAll() {
+        return DozerMapper.parseListObjects(articleRepository.findAll(), ArticleVO.class);
     }
 
-    public ArticleEntity save(ArticleEntity obj) {
-        return articleRepository.save(obj);
+    public ArticleVO save(ArticleVO obj) {
+        ArticleEntity entity = DozerMapper.parseObject(obj, ArticleEntity.class);
+        entity.setDate(LocalDateTime.now());
+        entity = articleRepository.save(entity);
+        return DozerMapper.parseObject(entity, ArticleVO.class);
     }
 
-    public ArticleEntity update(ArticleEntity obj) {
-        ArticleEntity entity = articleRepository.findById(obj.getId()).
+    public ArticleVO update(Integer id, ArticleVO obj) {
+        ArticleEntity entity = articleRepository.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
 
         entity.setTitle(obj.getTitle());
         entity.setAuthor(obj.getAuthor());
-        entity.setLocalDateTime();
+        entity.setDate(LocalDateTime.now());
         entity.setText(obj.getText());
 
-        return articleRepository.save(obj);
+        entity = articleRepository.save(entity);
+
+        return DozerMapper.parseObject(entity, ArticleVO.class);
     }
 
     public void delete(Integer id) {

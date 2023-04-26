@@ -1,6 +1,6 @@
 package br.com.scienceblog.controllers;
 
-import br.com.scienceblog.model.entities.ArticleEntity;
+import br.com.scienceblog.data.vo.v1.ArticleVO;
 import br.com.scienceblog.model.servicies.ArticleService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,25 +18,25 @@ public class ArticleController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ArticleEntity> findAll() {
+    public List<ArticleVO> findAll() {
         return articleService.findAll();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleEntity findById(@PathVariable Integer id) {
+    public ArticleVO findById(@PathVariable Integer id) {
         return articleService.findById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleEntity create(@RequestBody ArticleEntity obj) {
+    public ArticleVO create(@RequestBody ArticleVO obj) {
         return articleService.save(obj);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleEntity update(@RequestBody ArticleEntity obj) {
-        return articleService.update(obj);
+    public ArticleVO update(@PathVariable Integer id, @RequestBody ArticleVO obj) {
+        return articleService.update(id, obj);
     }
 
     @DeleteMapping(value = "/{id}")

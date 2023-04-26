@@ -20,27 +20,30 @@ public class ArticleEntity {
     @NotBlank
     private String author;
     @JsonFormat(shape =JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime localDateTime = LocalDateTime.now();
+    private LocalDateTime date;
     @NotBlank
     @Lob
     private String text;
 
     public ArticleEntity() {}
 
-    public ArticleEntity(String title, String author, String text) {
+    public ArticleEntity(String title, String author, LocalDateTime date, String text) {
         this.title = title;
         this.author = author;
+        this.date = date;
         this.text = text;
     }
 
     public Integer getId() {
         return id;
     }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -48,19 +51,18 @@ public class ArticleEntity {
     public String getAuthor() {
         return author;
     }
-
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public LocalDateTime getLocalDateTime() {return localDateTime;}
-
-    public void setLocalDateTime() {this.localDateTime = LocalDateTime.now();}
+    public LocalDateTime getDate() {return date;}
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
