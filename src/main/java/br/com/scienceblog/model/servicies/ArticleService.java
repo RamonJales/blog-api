@@ -42,6 +42,7 @@ public class ArticleService {
                 orElseThrow(() -> new ResourceNotFoundException("Object not found!"));
 
         entity.setTitle(obj.getTitle());
+        entity.setSubTitle(obj.getSubTitle());
         entity.setAuthor(obj.getAuthor());
         entity.setDate(LocalDateTime.now());
         entity.setText(obj.getText());
