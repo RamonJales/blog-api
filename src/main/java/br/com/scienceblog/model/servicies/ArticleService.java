@@ -2,6 +2,7 @@ package br.com.scienceblog.model.servicies;
 
 import br.com.scienceblog.controllers.exceptions.ResourceNotFoundException;
 import br.com.scienceblog.data.vo.v1.ArticleVO;
+import br.com.scienceblog.data.vo.v2.ArticleVOV2;
 import br.com.scienceblog.mapper.DozerMapper;
 import br.com.scienceblog.model.entities.ArticleEntity;
 import br.com.scienceblog.model.repositories.ArticleRepository;
@@ -28,6 +29,10 @@ public class ArticleService {
 
     public List<ArticleVO> findAll() {
         return DozerMapper.parseListObjects(articleRepository.findAll(), ArticleVO.class);
+    }
+    
+    public List<ArticleVOV2> findAllV2() {
+    	return DozerMapper.parseListObjects(articleRepository.findAll(), ArticleVOV2.class);
     }
 
     public ArticleVO save(ArticleVO obj) {
