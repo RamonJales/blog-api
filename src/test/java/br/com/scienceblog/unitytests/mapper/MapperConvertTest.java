@@ -36,9 +36,10 @@ public class MapperConvertTest {
 		String subtitle = "subtitle 1";
 		String author = "author 1";
 		String text = "text 1";
+		LocalDateTime dateTime = LocalDateTime.now();
 		
-		ArticleEntity article = new ArticleEntity(id, title, subtitle, author, LocalDateTime.now(), text);
-		ArticleVO articleVO = new ArticleVO(id, title, subtitle, author, text);
+		ArticleEntity article = new ArticleEntity(id, title, subtitle, author, dateTime, text);
+		ArticleVO articleVO = new ArticleVO(id, title, subtitle, author, dateTime, text);
 		
 		Mockito.when(dozerMapper.map(article, ArticleVO.class)).thenReturn(articleVO);
 		
@@ -51,6 +52,7 @@ public class MapperConvertTest {
 		assertEquals(article.getSubTitle(), article.getSubTitle());
 		assertEquals(article.getAuthor(), output.getAuthor());
 		assertEquals(article.getText(), output.getText());
+		assertEquals(article.getDateTime(), output.getDateTime());
 	}
 	
 	
@@ -62,9 +64,10 @@ public class MapperConvertTest {
 		String subtitle = "subtitle 1";
 		String author = "author 1";
 		String text = "text 1";
+		LocalDateTime dateTime = LocalDateTime.now();
 		
-		ArticleVO articleVO = new ArticleVO(id, title, subtitle, author, text);
-		ArticleEntity article = new ArticleEntity(id, title, subtitle, author, null, text);
+		ArticleVO articleVO = new ArticleVO(id, title, subtitle, author, dateTime, text);
+		ArticleEntity article = new ArticleEntity(id, title, subtitle, author, dateTime, text);
 		
 		Mockito.when(dozerMapper.map(articleVO, ArticleEntity.class)).thenReturn(article);
 		
@@ -78,7 +81,7 @@ public class MapperConvertTest {
 		assertEquals(articleVO.getSubTitle(), output.getSubTitle());
 		assertEquals(articleVO.getAuthor(), output.getAuthor());
 		assertEquals(articleVO.getText(), output.getText());
-		assertEquals(null, output.getDate());
+		assertEquals(articleVO.getDateTime(), output.getDateTime());
 	}
 	
 }

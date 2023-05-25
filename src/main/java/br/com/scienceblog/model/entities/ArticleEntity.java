@@ -28,7 +28,7 @@ public class ArticleEntity implements Serializable {
     private String author;
     
     @JsonFormat(shape =JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
     
     @NotBlank
     @Column(columnDefinition = "TEXT")
@@ -37,12 +37,12 @@ public class ArticleEntity implements Serializable {
     public ArticleEntity() {}
 
     public ArticleEntity(Integer id, String title, String subTitle, String author,
-			LocalDateTime date, String text) {
+			LocalDateTime dateTime, String text) {
     	this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.author = author;
-		this.date = date;
+		this.dateTime = dateTime;
 		this.text = text;
 	}
 
@@ -75,9 +75,9 @@ public class ArticleEntity implements Serializable {
         this.author = author;
     }
 
-    public LocalDateTime getDate() {return date;}
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public LocalDateTime getDateTime() {return dateTime;}
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
     
     public String getText() {

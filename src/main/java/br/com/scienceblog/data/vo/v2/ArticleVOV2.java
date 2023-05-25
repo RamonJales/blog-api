@@ -1,6 +1,7 @@
 package br.com.scienceblog.data.vo.v2;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class ArticleVOV2 implements Serializable {
 
@@ -10,13 +11,16 @@ public class ArticleVOV2 implements Serializable {
     private String title;
     private String subTitle;
     private String author;
+    private LocalDateTime dateTime;
 
     public ArticleVOV2() {}
 
-	public ArticleVOV2(Integer id, String title, String subTitle, String author) {
+	public ArticleVOV2(Integer id, String title, String subTitle, String author, LocalDateTime dateTime) {
+		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.author = author;
+		this.dateTime = dateTime;
 	}
 	
 	public Integer getId() {
@@ -49,6 +53,14 @@ public class ArticleVOV2 implements Serializable {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
 	}
 
 }

@@ -39,7 +39,7 @@ public class ArticleService {
 
     public ArticleVO save(ArticleVO obj) {
         ArticleEntity entity = mapper.parseObject(obj, ArticleEntity.class);
-        entity.setDate(LocalDateTime.now());
+        entity.setDateTime(LocalDateTime.now());
         entity = articleRepository.save(entity);
         return mapper.parseObject(entity, ArticleVO.class);
     }
@@ -51,7 +51,7 @@ public class ArticleService {
         entity.setTitle(obj.getTitle());
         entity.setSubTitle(obj.getSubTitle());
         entity.setAuthor(obj.getAuthor());
-        entity.setDate(LocalDateTime.now());
+        entity.setDateTime(LocalDateTime.now());
         entity.setText(obj.getText());
 
         entity = articleRepository.save(entity);
