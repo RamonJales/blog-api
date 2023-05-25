@@ -6,16 +6,25 @@ public class ArticleVOV2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
     private String title;
     private String subTitle;
     private String author;
 
     public ArticleVOV2() {}
 
-	public ArticleVOV2(String title, String subTitle, String author) {
+	public ArticleVOV2(Integer id, String title, String subTitle, String author) {
 		this.title = title;
 		this.subTitle = subTitle;
 		this.author = author;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitle() {

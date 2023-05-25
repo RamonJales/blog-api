@@ -14,7 +14,7 @@ public class ArticleEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @NotBlank
@@ -36,8 +36,9 @@ public class ArticleEntity implements Serializable {
 
     public ArticleEntity() {}
 
-    public ArticleEntity(String title, String subTitle, String author,
+    public ArticleEntity(Integer id, String title, String subTitle, String author,
 			LocalDateTime date, String text) {
+    	this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.author = author;

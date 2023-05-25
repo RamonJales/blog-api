@@ -6,7 +6,9 @@ import br.com.scienceblog.model.servicies.ArticleService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -33,16 +35,22 @@ public class ArticleController {
         return articleService.findById(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-    produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleVO create(@RequestBody ArticleVO obj) {
-        return articleService.save(obj);
+    @PostMapping
+    public ResponseEntity<ArticleVO> create(@RequestBody ArticleVO obj) {
+    	obj = articleService.save(obj);
+    	URI uri = ServletUriComponentsBuilder
+    			.fromCurrentRequest()
+    			.path("/{id}")
+    			.buildAndExpand(obj.getId())
+    			.toUri();
+    	
+        return ResponseEntity.created(uri).body(obj);
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
-    produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleVO update(@PathVariable Integer id, @RequestBody ArticleVO obj) {
-        return articleService.update(id, obj);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ArticleVO> update(@PathVariable Integer id, @RequestBody ArticleVO obj) {
+        obj = articleService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
     }
 
     @DeleteMapping(value = "/{id}")

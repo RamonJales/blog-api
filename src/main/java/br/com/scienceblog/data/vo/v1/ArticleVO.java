@@ -2,10 +2,13 @@ package br.com.scienceblog.data.vo.v1;
 
 import java.io.Serializable;
 
+//colcoar o atributo data
+
 public class ArticleVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
     private String title;
     private String subTitle;
     private String author;
@@ -13,11 +16,20 @@ public class ArticleVO implements Serializable {
 
     public ArticleVO() {}
 
-	public ArticleVO(String title, String subTitle, String author, String text) {
+	public ArticleVO(Integer id, String title, String subTitle, String author, String text) {
+		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.author = author;
 		this.text = text;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
