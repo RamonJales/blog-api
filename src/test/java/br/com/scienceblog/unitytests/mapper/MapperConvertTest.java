@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.modelmapper.MappingException;
 
 import br.com.scienceblog.data.vo.v1.ArticleVO;
+import br.com.scienceblog.data.vo.v2.ArticleVOV2;
 import br.com.scienceblog.mapper.Mapper;
 import br.com.scienceblog.model.entities.ArticleEntity;
 
@@ -63,7 +64,7 @@ public class MapperConvertTest {
 	
 	@Test
 	@DisplayName("Parse entity list to VO V1 list when success test")
-	public void parseEntityListToVOListWhenSuccessTest() {
+	public void parseEntityListToVOV1ListWhenSuccessTest() {
 		ArticleEntity entity1 = new ArticleEntity(id, title, subtitle, author, dateTime, text);
 		ArticleEntity entity2 = new ArticleEntity(id + 1, title + "2", subtitle + "2", author + "2", dateTime, text + "2");
 		List<ArticleEntity> listEntity = new ArrayList<>(Arrays.asList(entity1, entity2));
@@ -91,28 +92,111 @@ public class MapperConvertTest {
 	@Test
 	@DisplayName("Parse VO V1 list to entity list when success test")
 	public void parseVOV1ListToEntityListWhenSuccessTest() {
-		ArticleVO VOV1 = new ArticleVO(id, title, subtitle, author, dateTime, text);
-		ArticleVO VOV2 = new ArticleVO(id + 1, title + "2", subtitle + "2", author + "2", dateTime, text + "2");
-		List<ArticleVO> listVO = new ArrayList<>(Arrays.asList(VOV1, VOV2));
+		ArticleVO VO1 = new ArticleVO(id, title, subtitle, author, dateTime, text);
+		ArticleVO VO2 = new ArticleVO(id + 1, title + "2", subtitle + "2", author + "2", dateTime, text + "2");
+		List<ArticleVO> listVO = new ArrayList<>(Arrays.asList(VO1, VO2));
 		
 		List<ArticleEntity> listEntity = Mapper.parseListObjects(listVO, ArticleEntity.class);
 				
 		assertNotNull(listEntity);
 		assertEquals(2, listEntity.size());
 		
-		assertEquals(VOV1.getId(), listEntity.get(0).getId());
-		assertEquals(VOV1.getTitle(), listEntity.get(0).getTitle());
-		assertEquals(VOV1.getSubTitle(), listEntity.get(0).getSubTitle());
-		assertEquals(VOV1.getAuthor(), listEntity.get(0).getAuthor());
-		assertEquals(VOV1.getText(), listEntity.get(0).getText());
-		assertEquals(VOV1.getDateTime(), listEntity.get(0).getDateTime());
+		assertEquals(VO1.getId(), listEntity.get(0).getId());
+		assertEquals(VO1.getTitle(), listEntity.get(0).getTitle());
+		assertEquals(VO1.getSubTitle(), listEntity.get(0).getSubTitle());
+		assertEquals(VO1.getAuthor(), listEntity.get(0).getAuthor());
+		assertEquals(VO1.getText(), listEntity.get(0).getText());
+		assertEquals(VO1.getDateTime(), listEntity.get(0).getDateTime());
 		
-		assertEquals(VOV2.getId(), listEntity.get(1).getId());
-		assertEquals(VOV2.getTitle(), listEntity.get(1).getTitle());
-		assertEquals(VOV2.getSubTitle(), listEntity.get(1).getSubTitle());
-		assertEquals(VOV2.getAuthor(), listEntity.get(1).getAuthor());
-		assertEquals(VOV2.getText(), listEntity.get(1).getText());
-		assertEquals(VOV2.getDateTime(), listEntity.get(1).getDateTime());
+		assertEquals(VO2.getId(), listEntity.get(1).getId());
+		assertEquals(VO2.getTitle(), listEntity.get(1).getTitle());
+		assertEquals(VO2.getSubTitle(), listEntity.get(1).getSubTitle());
+		assertEquals(VO2.getAuthor(), listEntity.get(1).getAuthor());
+		assertEquals(VO2.getText(), listEntity.get(1).getText());
+		assertEquals(VO2.getDateTime(), listEntity.get(1).getDateTime());
+	}
+	
+	@Test
+	@DisplayName("Parse entity to VO V2 object when success test")
+	public void parseEntityToVOV2WhenSuccessTest() {
+		
+		ArticleEntity article = new ArticleEntity(id, title, subtitle, author, dateTime, text);
+						
+		ArticleVOV2 output = Mapper.parseObject(article, ArticleVOV2.class);
+		
+		assertEquals(article.getId(), output.getId());
+		assertEquals(article.getTitle(), output.getTitle());
+		assertEquals(article.getSubTitle(), article.getSubTitle());
+		assertEquals(article.getAuthor(), output.getAuthor());
+		assertEquals(article.getDateTime(), output.getDateTime());
+	}
+	
+	@Test
+	@DisplayName("Parse VO V2 to entity object when success test")
+	public void parseVOV2ToEntityWhenSuccessTest() {
+		
+		ArticleVOV2 articleVOV2 = new ArticleVOV2(id, title, subtitle, author, dateTime);
+						
+		ArticleEntity output = Mapper.parseObject(articleVOV2, ArticleEntity.class);
+				
+		assertEquals(articleVOV2.getId(), output.getId());
+		assertEquals(articleVOV2.getTitle(), output.getTitle());
+		assertEquals(articleVOV2.getSubTitle(), output.getSubTitle());
+		assertEquals(articleVOV2.getAuthor(), output.getAuthor());
+		assertEquals(null, output.getText());
+		assertEquals(articleVOV2.getDateTime(), output.getDateTime());
+	}
+	
+	@Test
+	@DisplayName("Parse entity list to VO V2 list when success test")
+	public void parseEntityListToVOV2ListWhenSuccessTest() {
+		ArticleEntity entity1 = new ArticleEntity(id, title, subtitle, author, dateTime, text);
+		ArticleEntity entity2 = new ArticleEntity(id + 1, title + "2", subtitle + "2", author + "2", dateTime, text + "2");
+		List<ArticleEntity> listEntity = new ArrayList<>(Arrays.asList(entity1, entity2));
+		
+		List<ArticleVOV2> listVOV2 = Mapper.parseListObjects(listEntity, ArticleVOV2.class);
+				
+		assertNotNull(listVOV2);
+		assertEquals(2, listVOV2.size());
+		
+		assertEquals(entity1.getId(), listVOV2.get(0).getId());
+		assertEquals(entity1.getTitle(), listVOV2.get(0).getTitle());
+		assertEquals(entity1.getSubTitle(), listVOV2.get(0).getSubTitle());
+		assertEquals(entity1.getAuthor(), listVOV2.get(0).getAuthor());
+		assertEquals(entity1.getDateTime(), listVOV2.get(0).getDateTime());
+		
+		assertEquals(entity2.getId(), listVOV2.get(1).getId());
+		assertEquals(entity2.getTitle(), listVOV2.get(1).getTitle());
+		assertEquals(entity2.getSubTitle(), listVOV2.get(1).getSubTitle());
+		assertEquals(entity2.getAuthor(), listVOV2.get(1).getAuthor());
+		assertEquals(entity2.getDateTime(), listVOV2.get(1).getDateTime());
+	}
+	
+	@Test
+	@DisplayName("Parse VO V2 list to entity list when success test")
+	public void parseVOV2ListToEntityListWhenSuccessTest() {
+		ArticleVOV2 VO1 = new ArticleVOV2(id, title, subtitle, author, dateTime);
+		ArticleVOV2 VO2 = new ArticleVOV2(id + 1, title + "2", subtitle + "2", author + "2", dateTime);
+		List<ArticleVOV2> listVO = new ArrayList<>(Arrays.asList(VO1, VO2));
+		
+		List<ArticleEntity> listEntity = Mapper.parseListObjects(listVO, ArticleEntity.class);
+				
+		assertNotNull(listEntity);
+		assertEquals(2, listEntity.size());
+		
+		assertEquals(VO1.getId(), listEntity.get(0).getId());
+		assertEquals(VO1.getTitle(), listEntity.get(0).getTitle());
+		assertEquals(VO1.getSubTitle(), listEntity.get(0).getSubTitle());
+		assertEquals(VO1.getAuthor(), listEntity.get(0).getAuthor());
+		assertEquals(VO1.getDateTime(), listEntity.get(0).getDateTime());
+		assertEquals(null, listEntity.get(0).getText());
+		
+		assertEquals(VO2.getId(), listEntity.get(1).getId());
+		assertEquals(VO2.getTitle(), listEntity.get(1).getTitle());
+		assertEquals(VO2.getSubTitle(), listEntity.get(1).getSubTitle());
+		assertEquals(VO2.getAuthor(), listEntity.get(1).getAuthor());
+		assertEquals(VO2.getDateTime(), listEntity.get(1).getDateTime());
+		assertEquals(null, listEntity.get(1).getText());
 	}
 	
 	@Test()

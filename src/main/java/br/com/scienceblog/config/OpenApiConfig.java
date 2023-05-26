@@ -10,8 +10,8 @@ import io.swagger.v3.oas.models.info.License;
 @Configuration
 public class OpenApiConfig {
 
-	@Bean
-	public OpenAPI customOpenApi() {
+    @Bean
+    OpenAPI customOpenApi() {
 		return new OpenAPI()
 				.info(new Info()
 						.title("Restful blog science API with Java 18 and Spring Boot 3")
