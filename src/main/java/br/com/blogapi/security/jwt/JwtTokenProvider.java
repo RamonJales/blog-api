@@ -1,4 +1,4 @@
-package br.com.blogapi.securityJwt;
+package br.com.blogapi.security.jwt;
 
 import java.util.Base64;
 import java.util.Date;
